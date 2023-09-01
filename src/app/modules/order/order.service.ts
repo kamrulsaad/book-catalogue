@@ -1,4 +1,4 @@
-import { Order } from '@prisma/client';
+import { Order, Prisma } from '@prisma/client';
 import { IOrderedBooksRequest } from './order.interface';
 import { JwtPayload } from 'jsonwebtoken';
 import prisma from '../../../shared/prisma';
@@ -48,6 +48,45 @@ const insertIntoDB = async (
   return result;
 };
 
+const getAllOrders = async (user: JwtPayload): Promise<Order[]> => {
+  const whereConditions: Prisma.OrderWhereInput =
+    user.role === 'admin' ? {} : { userId: user.userId };
+
+  const result = await prisma.order.findMany({
+    where: whereConditions,
+    include: {
+      orderedBooks: true,
+    },
+  });
+
+  return result;
+};
+
+const getSingleOrder = async (
+  orderId: string,
+  user: JwtPayload
+): Promise<Order> => {
+  const whereConditions: Prisma.OrderWhereInput =
+    user.role === 'admin'
+      ? { id: orderId }
+      : { id: orderId, userId: user.userId };
+
+  const result = await prisma.order.findUnique({
+    where: whereConditions as Prisma.OrderWhereUniqueInput,
+    include: {
+      orderedBooks: true,
+    },
+  });
+
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Order not found or unauthorized');
+  }
+
+  return result;
+};
+
 export const OrderService = {
   insertIntoDB,
+  getAllOrders,
+  getSingleOrder,
 };
