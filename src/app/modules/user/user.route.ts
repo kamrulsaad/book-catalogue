@@ -10,4 +10,6 @@ router.get('/:id', auth(ENUM_USER_ROLE.ADMIN), UserController.getOneFromDB);
 
 router.patch('/:id', auth(ENUM_USER_ROLE.ADMIN), UserController.updateUserInDB);
 
+router.delete('/:id', auth(ENUM_USER_ROLE.ADMIN), UserController.deleteUser);
+
 export const UserRoutes = router;
