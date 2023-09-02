@@ -1,17 +1,22 @@
 import { User } from '@prisma/client';
 import prisma from '../../../shared/prisma';
+import ApiError from '../../../errors/ApiError';
+import httpStatus from 'http-status';
 
 const getAllUsers = async (): Promise<User[]> => {
   const result = await prisma.user.findMany();
   return result;
 };
 
-const getOneFromDB = async (id: string): Promise<User | null> => {
+const getOneFromDB = async (id: string): Promise<User> => {
   const result = await prisma.user.findUnique({
     where: {
       id,
     },
   });
+
+  if (!result) throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+
   return result;
 };
 
