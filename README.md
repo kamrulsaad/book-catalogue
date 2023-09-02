@@ -1,69 +1,37 @@
-# University Management Core Service
-This guide will walk you through the process of setting up the University Management Core Service Starter project. By following these steps, you will clone the project, install dependencies, and configure Prisma for database management. Let's get started!
+# Book Catalog Backend Assignment - Prisma | PostgreSQL | Node.js | Express.js
 
+## Live Link: https://book-catalog-amber.vercel.app/
 
-## Installation Steps
-### Follow these steps to clone and set up starter project:
+### Application Routes:
 
-1. `Clone the project:` Open your terminal or command prompt and run the following command to clone the project repository:
+#### User
 
-```bash
-git clone https://github.com/Programming-Hero-Next-Level-Development/university-management-core-service-starter.git university-management-core-service
-```
+- https://book-catalog-amber.vercel.app/api/v1/auth/signup (POST)
+- https://book-catalog-amber.vercel.app/api/v1/users (GET)
+- https://book-catalog-amber.vercel.app/api/v1/users/f68249fb-e59f-476c-adbe-96c0ff4d6a2c (GET)
+- https://book-catalog-amber.vercel.app/api/v1/users/f68249fb-e59f-476c-adbe-96c0ff4d6a2c (PATCH)
+- https://book-catalog-amber.vercel.app/api/v1/users/f68249fb-e59f-476c-adbe-96c0ff4d6a2c (DELETE)
+- https://book-catalog-amber.vercel.app/api/v1/profile (GET)
 
-2. `Navigate into the project directory:` Use the cd command to navigate into the project directory:
+### Category
 
-```bash
-cd university-management-core-service
-```
+- https://book-catalog-amber.vercel.app/api/v1/categories/create-category (POST)
+- https://book-catalog-amber.vercel.app/api/v1/categories (GET)
+- https://book-catalog-amber.vercel.app/api/v1/categories/b460ddad-919b-4e5e-8161-5002018840be (GET)
+- https://book-catalog-amber.vercel.app/api/v1/categories/b460ddad-919b-4e5e-8161-5002018840be (PATCH)
+- https://book-catalog-amber.vercel.app/api/v1/categories/b460ddad-919b-4e5e-8161-5002018840be (DELETE)
 
-3. `Install project dependencies:` Next, install the project dependencies by running the following command:
+### Books
 
-```bash
-yarn install
-```
+- https://book-catalog-amber.vercel.app/api/v1/books/create-book (POST)
+- https://book-catalog-amber.vercel.app/api/v1/books (GET)
+- https://book-catalog-amber.vercel.app/api/v1/books/b460ddad-919b-4e5e-8161-5002018840be/category (GET)
+- https://book-catalog-amber.vercel.app/api/v1/books/1a34aa8b-48a1-4aa4-ada5-81ac4509eade (GET)
+- https://book-catalog-amber.vercel.app/api/v1/books/1a34aa8b-48a1-4aa4-ada5-81ac4509eade (PATCH)
+- https://book-catalog-amber.vercel.app/api/v1/books/1a34aa8b-48a1-4aa4-ada5-81ac4509eade (DELETE)
 
-4. Configure Prisma and the database connection:
+### Orders
 
-- Add Prisma as a development dependency by running the following command:
-```bash
-yarn add prisma --save-dev
-```
-
-- Set up your Prisma project by creating the Prisma schema file using the following command:
-```bash
-npx prisma init
-```
-
-- Open the prisma/schema.prisma file and configure your database connection details.
-
-```bash
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-```
-
-- Create a .env file in the project root directory and set the DATABASE_URL environment variable. Replace the placeholders with your database connection details:
-```bash
-DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA"
-```
-
-5. Creating the database schema
-6. Migrate the database schema: Use the following command to create and apply the initial database schema:
-
-```bash
-npx prisma migrate dev --name init
-```
-This command creates a new migration file based on your schema changes and applies it to your database.
-
-6. `Install Prisma Client:` Install the Prisma Client library by running the following command:
-```bash
-yarn add @prisma/client
-```
-
-This command installs the Prisma Client, which provides an interface to interact with your database.
-
-That's it! You have successfully set up the University Management Core Service Starter project. You can now start exploring and working with the codebase. Refer to the project documentation or README for further instructions on how to run and use the core service.
-
-Happy coding!
+- https://book-catalog-amber.vercel.app/api/v1/orders/create-order (POST)
+- https://book-catalog-amber.vercel.app/api/v1/orders (GET)
+- https://book-catalog-amber.vercel.app/api/v1/orders/4d904ab6-3626-40a4-a3ca-94e835f466ab (GET)
